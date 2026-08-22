@@ -38,17 +38,16 @@ export function BeforeAfter() {
         height={864}
         className="absolute inset-0 size-full object-cover"
       />
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
-        <img
-          src={beforeImg}
-          alt={t("ba.before")}
-          loading="lazy"
-          width={1280}
-          height={853}
-          className="absolute inset-0 h-full w-full max-w-none object-cover"
-          style={{ width: ref.current?.clientWidth ?? "100%" }}
-        />
-      </div>
+      <img
+        src={beforeImg}
+        alt={t("ba.before")}
+        loading="lazy"
+        width={1280}
+        height={853}
+        className="absolute inset-0 size-full object-cover"
+        style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+      />
+
 
       <span className="absolute top-3 left-3 bg-foreground/80 px-2 py-1 text-[11px] font-medium tracking-wide text-background uppercase">
         {t("ba.before")}
