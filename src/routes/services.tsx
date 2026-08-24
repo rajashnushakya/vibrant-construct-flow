@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Building2, Check, Hammer, Home, Sofa } from "lucide-react";
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
