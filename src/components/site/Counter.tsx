@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 export function Counter({
   value,
@@ -29,9 +29,15 @@ export function Counter({
   }, [inView, value, duration]);
 
   return (
-    <span ref={ref}>
+    <motion.span
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.6 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+    >
       {n}
       {suffix}
-    </span>
+    </motion.span>
   );
 }

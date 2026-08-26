@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { motion } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -128,6 +129,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -136,8 +138,17 @@ function RootComponent() {
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">
-              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
+              {/* Keyed remount per pathname: the new page renders immediately and
+                  fades in. No AnimatePresence mode="wait" here — a blocking exit
+                  animation added ~0.6s of dead time to every navigation. */}
+              <motion.div
+                key={router.state.location.pathname}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Outlet />
+              </motion.div>
             </main>
             <Footer />
             <QuickContact />

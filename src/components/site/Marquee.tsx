@@ -1,17 +1,24 @@
+import { motion } from "framer-motion";
+
 export function Marquee({ items }: { items: string[] }) {
   const row = [...items, ...items];
   return (
     <div className="group relative overflow-hidden border-y border-border/60 py-5">
-      <div className="animate-marquee flex w-max gap-12 group-hover:[animation-play-state:paused]">
+      <motion.div
+        className="flex w-max gap-12"
+        animate={{ x: [0, -50] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
         {row.map((item, i) => (
-          <span
+          <motion.span
             key={`${item}-${i}`}
-            className="text-xs tracking-[0.22em] whitespace-nowrap text-muted-foreground uppercase"
+            whileHover={{ scale: 1.05, color: "var(--color-brand)" }}
+            className="text-xs tracking-[0.22em] whitespace-nowrap text-muted-foreground uppercase transition-colors"
           >
             {item}
-          </span>
+          </motion.span>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

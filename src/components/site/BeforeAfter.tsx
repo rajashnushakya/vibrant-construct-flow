@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import beforeImg from "@/assets/before.jpg";
 import afterImg from "@/assets/after.jpg";
@@ -17,8 +18,6 @@ export function BeforeAfter() {
     setPos(Math.min(100, Math.max(0, next)));
   }, []);
 
-  // Track pointer globally while dragging so the handle keeps following the
-  // cursor/finger even when it leaves the image bounds.
   useEffect(() => {
     if (!dragging) return;
     const onMove = (e: PointerEvent) => {
@@ -45,7 +44,6 @@ export function BeforeAfter() {
         move(e.clientX);
       }}
       onMouseMove={(e) => {
-        // Hover scrub on desktop for a more responsive feel.
         if (!dragging && e.buttons === 0 && window.matchMedia("(hover: hover)").matches) {
           move(e.clientX);
         }
@@ -82,14 +80,16 @@ export function BeforeAfter() {
         className="pointer-events-none absolute inset-y-0 w-0.5 bg-background"
         style={{ left: `${pos}%` }}
       >
-        <div
-          className={`absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-background bg-primary text-xs font-bold text-primary-foreground shadow-lg transition-transform duration-150 ${dragging ? "scale-110" : ""}`}
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [1, 0.8, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-background bg-primary text-xs font-bold text-primary-foreground shadow-lg"
+          style={{ transform: "translate(-50%, -50%) scale(" + (dragging ? 1.1 : 1) + ")" }}
         >
           ↔
-        </div>
+        </motion.div>
       </div>
 
-      {/* Accessible + keyboard control */}
       <input
         type="range"
         min={0}
