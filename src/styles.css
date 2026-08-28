@@ -170,3 +170,16 @@
     animation: none;
   }
 }
+
+[data-lovable-badge],
+.lovable-badge,
+.lovable-preview-badge,
+iframe[src*="lovable"],
+iframe[src*="gptengineer"],
+div[class*="lovable"],
+div[class*="gpt-engineer"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
