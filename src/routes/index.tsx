@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Building2, Hammer, Home, Sofa } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero.jpeg";
 import { useI18n } from "@/lib/i18n";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/Reveal";
 import { HoverLift } from "@/components/site/Animations";
@@ -98,20 +98,20 @@ function Index() {
         </div>
       </section>
 
-          <section className="border-b border-border/60">
-            <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-border/60 px-5">
-              {[
-                { v: "120+", k: "home.stat1" },
-                { v: "14", k: "home.stat2" },
-                { v: "98%", k: "home.stat3" },
-              ].map((s, i) => (
-                <Reveal key={s.k} delay={i * 0.1} className="px-3 py-10 text-center">
-                  <p className="font-display text-3xl font-semibold text-primary sm:text-4xl">{s.v}</p>
-                  <p className="mt-2 text-xs text-muted-foreground sm:text-sm">{t(s.k)}</p>
-                </Reveal>
-              ))}
-            </div>
-          </section>
+      <section className="border-b border-border/60">
+        <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-border/60 px-5">
+          {[
+            { v: "120+", k: "home.stat1" },
+            { v: "14", k: "home.stat2" },
+            { v: "98%", k: "home.stat3" },
+          ].map((s, i) => (
+            <Reveal key={s.k} delay={i * 0.1} className="px-3 py-10 text-center">
+              <p className="font-display text-3xl font-semibold text-primary sm:text-4xl">{s.v}</p>
+              <p className="mt-2 text-xs text-muted-foreground sm:text-sm">{t(s.k)}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
